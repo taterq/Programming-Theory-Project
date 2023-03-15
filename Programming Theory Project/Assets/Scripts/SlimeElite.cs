@@ -17,8 +17,9 @@ public class SlimeElite : Slime
     {
         GameObject bomb=Instantiate(bulletPrefab,transform.position,bulletPrefab.transform.rotation);
         GameObject player=GameObject.FindGameObjectWithTag("Player");
-        bomb.GetComponent<Bomb>().target = player.transform.position;
+        bomb.GetComponent<Bomb>().target = player.transform.position+new Vector3(Random.Range(-3f,3f),0,Random.Range(-1.5f,1.5f));
         bomb.GetComponent<Bomb>().targetLayer = "Player";
         base.OnAttacking();
     }
+
 }

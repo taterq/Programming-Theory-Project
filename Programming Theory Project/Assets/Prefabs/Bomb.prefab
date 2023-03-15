@@ -118,12 +118,13 @@ MonoBehaviour:
   targetLayerMask: 0
   bombColor: {r: 0.019005895, g: 1, b: 0, a: 1}
   bombSignColor: {r: 1, g: 0, b: 0, a: 0.20392157}
-  bombRange: 2.5
+  bombRange: 1.5
   damage: 1
   bombParticle: {fileID: 1145493045107330227}
   bombSignPrefab: {fileID: 6306202015613191651, guid: 22ea859e654ef5c499a5b358740bdab6, type: 3}
   bombSignInstance: {fileID: 0}
   livedTime: 0
+  isExploded: 0
 --- !u!1001 &946986331956942941
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -25,15 +25,15 @@ public class Bomb : MonoBehaviour
         target.y = transform.position.y;
         Vector3 direct = target - transform.position;
         transform.LookAt(target);
-        speed = direct.magnitude / lastTime;
+        speed = Mathf.Min(direct.magnitude / lastTime,speed);
         targetLayerMask = LayerMask.GetMask(targetLayer);
         GetComponent<Renderer>().material.color = bombColor;
         bombSignInstance=Instantiate(bombSignPrefab);
         Vector3 pos = target;
         pos.y = 0;
-        bombSignInstance.transform.position = pos;
+        bombSignInstance.transform.position = direct.normalized*lastTime*speed+transform.position;
         bombSignInstance.GetComponent<Renderer>().material.color = bombSignColor;
-        bombSignInstance.transform.localScale = new Vector3(bombRange,0.001f,bombRange);
+        bombSignInstance.transform.localScale = new Vector3(bombRange*2,0.001f,bombRange*2);
     }
 
     // Update is called once per frame
@@ -76,6 +76,14 @@ public class Bomb : MonoBehaviour
             if (item.gameObject.CompareTag("Player"))
                 item.gameObject.GetComponent<EntityState>().BeHit((int)damage);
 
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(Explode());
         }
     }
 }
