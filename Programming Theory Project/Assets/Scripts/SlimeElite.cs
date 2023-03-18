@@ -10,6 +10,7 @@ public class SlimeElite : Slime
     public override void InitState()
     {
         InvokeRepeating("OnAttacking", attackDelay, attackCD);
+        
         base.InitState();
     }
 
@@ -20,6 +21,12 @@ public class SlimeElite : Slime
         bomb.GetComponent<Bomb>().target = player.transform.position+new Vector3(Random.Range(-3f,3f),0,Random.Range(-1.5f,1.5f));
         bomb.GetComponent<Bomb>().targetLayer = "Player";
         base.OnAttacking();
+    }
+
+    public override IEnumerator ToDestroy()
+    {
+        CancelInvoke();
+        return base.ToDestroy();
     }
 
 }

@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class Superman : PlayerUnit
 {
-    [SerializeField] private GameManager manager;
-    private void Start()
-    {
-        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
+    [SerializeField] private GameObject laser;
     public override void OnAttacking()
     {
-        Vector3 pos = manager.GetWorldPositionByMouse();
-        Ray ray = new Ray();
-        ray.origin = transform.position;
-        ray.
+        StopCoroutine("Lasering");
+        StartCoroutine(Lasering());
         base.OnAttacking();
     }
+
+    IEnumerator Lasering()
+    {
+        laser.SetActive(true);
+        while (onAttacking)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        laser.SetActive(false);
+    }
+
 }

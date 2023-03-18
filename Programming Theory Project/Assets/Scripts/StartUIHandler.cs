@@ -16,6 +16,7 @@ public class StartUIHandler : MonoBehaviour
 
     public void OnBatmanClicked()
     {
+        
         mainManager.instance.playerChar = MainManager.SUPERHERO_LIST.BATMAN;
         StartGame();
     }

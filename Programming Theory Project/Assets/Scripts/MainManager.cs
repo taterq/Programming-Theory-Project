@@ -12,7 +12,12 @@ public class MainManager : MonoBehaviour
         BATMAN=0,
         SUPERMAN=1
     }
-    public MainManager instance = null;
+    public MainManager instance 
+    { 
+        get { return _instance; }
+        set { _instance = value; }
+    }
+    static private MainManager _instance = null;
     public SUPERHERO_LIST playerChar = SUPERHERO_LIST.UNKNOWN;
 
     private void Awake()

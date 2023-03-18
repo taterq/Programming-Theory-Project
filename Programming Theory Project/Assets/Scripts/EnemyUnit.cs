@@ -7,7 +7,7 @@ public abstract class EnemyUnit : MonoBehaviour
     [SerializeField] protected float centerRange;
     [SerializeField] protected float maxRange;
     [SerializeField] protected EntityState enemyState;
-    [SerializeField] protected ParticleSystem deadParticle;
+    [SerializeField] protected GameObject deadParticle;
     protected enum ENEMYSTATE
     {
         MOVING,
@@ -24,22 +24,27 @@ public abstract class EnemyUnit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnOutOfRange();
-        AI();
+        if (IsAlive())
+        {
+            OnOutOfRange();
+            AI();
+        }
     }
-    public void BeHit(int hit)
+    private bool IsAlive()
     {
-        enemyState.BeHit(hit);
-        if (enemyState.isAlive)
+        if (!enemyState.isAlive)
         {
             StartCoroutine(ToDestroy());
         }
+        return enemyState.isAlive;
     }
     
-    public IEnumerator ToDestroy()
+    virtual public IEnumerator ToDestroy()
     {
-        deadParticle.Play();
-        yield return new WaitForSeconds(1);
+        deadParticle.SetActive(true);
+        GetComponent<Renderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 
@@ -74,4 +79,5 @@ public abstract class EnemyUnit : MonoBehaviour
     abstract public void OnMoving();
     abstract public void OnAttacking();
     abstract public void OnBusying();
+
 }
