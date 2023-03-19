@@ -75,7 +75,7 @@ public abstract class EnemyUnit : MonoBehaviour
     }
 
 
-    abstract public void InitState();
+    abstract public void InitState();// ABSTRACTION
     abstract public void OnMoving();
     abstract public void OnAttacking();
     abstract public void OnBusying();

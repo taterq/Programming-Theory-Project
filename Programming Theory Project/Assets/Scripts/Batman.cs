@@ -15,7 +15,6 @@ public class Batman : PlayerUnit
             BatmanDart.Shoot(transform.position,mousePoint-transform.position,dartNum,dartRange);
             StartCoroutine(CoolDown());
         }
-        base.OnAttacking();
     }
     IEnumerator CoolDown()
     {

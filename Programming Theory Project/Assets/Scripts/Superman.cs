@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Superman : PlayerUnit
+public class Superman : PlayerUnit//INHERITANCE
 {
     [SerializeField] private GameObject laser;
-    public override void OnAttacking()
+    public override void OnAttacking()//POLYMORPHISM
     {
         StopCoroutine("Lasering");
         StartCoroutine(Lasering());
-        base.OnAttacking();
     }
 
     IEnumerator Lasering()

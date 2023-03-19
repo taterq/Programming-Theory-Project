@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider),typeof(EntityState),typeof(Rigidbody))]
-public class PlayerUnit : MonoBehaviour
+public abstract class PlayerUnit : MonoBehaviour
 {
     [SerializeField] private Color color;
     [SerializeField] static protected Vector3 mousePoint;
@@ -12,11 +12,13 @@ public class PlayerUnit : MonoBehaviour
     [SerializeField] protected float maxSpeed;
     [SerializeField] protected string _playerName;
     [SerializeField] protected bool onAttacking = false;
-    string playerName 
+    string playerName //ENCAPSULATION
     {
         get { return _playerName;}
     }
     [SerializeField] protected Rigidbody rb;
+
+    public abstract void OnAttacking(); //ABSTRACTION
     // Start is called before the first frame update
     void Start()
     {
@@ -45,10 +47,7 @@ public class PlayerUnit : MonoBehaviour
             onAttacking = false;
         }
     }
-    public virtual void OnAttacking()
-    {
-
-    }
+    
 
     void UpdateGlobal()
     {
